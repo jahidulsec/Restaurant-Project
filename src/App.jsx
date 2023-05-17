@@ -8,6 +8,7 @@ import Reservation from './pages/Reservation'
 import Menu from './pages/Menu'
 import Login from './pages/Login'
 import Registration from './pages/Registration'
+import ConfirmationPage from './pages/ConfirmationPage'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/reservation' element={<Reservation />} />
+            <Route path='/confirmation' element={<ConfirmationPage />} />
             <Route path='/menu' element={<Menu />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Registration />} />

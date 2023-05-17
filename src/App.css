@@ -599,7 +599,9 @@ nav a{
     padding: 5em 0;
     margin-top: -2em;
     margin-bottom: -2em;
+    overflow: hidden;
     position: relative;
+    isolation: isolate;
 }
 
 
@@ -609,6 +611,7 @@ nav a{
     position: absolute;
     inset: 1em 0 0 0;
     margin: auto;
+    z-index: -1;
 }
 
 .service-section .container{
@@ -627,19 +630,23 @@ nav a{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     gap: 2.125em;
 }
 
 /* service card */
 .service-card{
-    width: 15.125rem;
-    aspect-ratio: 1;
+    
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 13rem;
+    min-width: 13rem;
+    aspect-ratio: 1;
+    
     border: 5px solid var(--clr-yellow);
-    border-top-right-radius: 70px;
-    border-bottom-left-radius: 70px;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
     position: relative;
     overflow: hidden;
     isolation: isolate;
@@ -739,7 +746,6 @@ nav a{
 .testimonial-section{
     margin: 3em 0;
     max-height: 30rem;
-    width: 100vw;
     padding: 10em;
     background-color: #ffc400a3;
     position: relative;
@@ -865,12 +871,15 @@ nav a{
 
 /* reservation-page */
 .reservation-section {
+    /* min-height: 100vh; */
+    /* overflow: hidden; */
     position: relative;
+    margin-bottom: 2em;
+
 }
 
 .reservation-bg-image > img,
-.reservation-bg-frame > svg,
-.reservation-bg-pattern > svg {
+.reservation-bg-frame > svg{
     position: absolute;
     z-index: -1;
     max-height: 50em;
@@ -887,7 +896,261 @@ nav a{
 }
 
 .reservation-bg-pattern > svg {
+    position: absolute;
+    z-index: -1;
+    top: 4em;
+    right: 6em;
     fill: var(--clr-yellow);
-    max-height: 45em;
+    max-height: 35em;
+    opacity: .25;
 }
 
+.reservation-section{
+    display: grid;
+    padding-right: 5em;
+    grid-template-columns: 0.8fr 1fr;
+}
+
+.reservation-section .container{
+    padding-top: 4em;
+}
+
+.reservation-section .container form{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 2em 0 8em 1em;
+    gap: 2em;
+
+}
+
+.reservation-section .container form .fields {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2em;
+}
+
+
+
+/* fields */
+
+
+.field-label, .field label{
+    font-family: var(--ff-primary);
+    font-size: var(--fs-200);
+    color: var(--clr-light);
+    font-weight: var(--fw-100);
+}
+
+
+input[type='date']{
+    appearance: none;
+    text-align: center;
+    width: 300px;
+    height: 60px;
+    font-family: var(--ff-primary);
+    font-weight: var(--fw-500);
+    font-size: var(--fs-200);
+    color: var(--clr-black);
+    background-color: var(--clr-yellow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    border-radius: 5px;
+    filter: drop-shadow(0.1em 0.1em 0.01em var(--clr-light));
+    transition: all 250ms ease-in-out;
+}
+
+
+/* dropdown list */
+
+.dropdown{
+    width: 300px;
+    height: 60px;
+}
+
+.active {
+    display: block;
+}
+
+.inactive {
+    display: none;
+}
+
+.dropdown-label{
+    font-family: var(--ff-primary);
+    font-weight: var(--fw-500);
+    font-size: var(--fs-200);
+    color: var(--clr-black);
+    background-color: var(--clr-yellow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    border-radius: 5px;
+    filter: drop-shadow(0.1em 0.1em 0.01em var(--clr-light));
+    transition: all 250ms ease-in-out;
+}
+
+.selected {
+    background-color: var(--clr-black);
+    color: var(--clr-yellow);
+    filter: drop-shadow(0.1em 0.1em 0.01em var(--clr-yellow));
+}
+
+.dropdown ul {
+    margin-top: 5px;
+
+}
+
+.dropdown-item{
+    position: relative;
+    z-index: 111;
+    font-family: var(--ff-primary);
+    font-size: var(--fs-200);
+    color: var(--clr-black);
+    background-color: var(--clr-light);
+    text-align: center;
+    padding: 1em;
+    border-bottom: 2px dashed var(--clr-black);
+}
+
+.dropdown-item:hover{
+    background-color: var(--clr-yellow);
+}
+
+.icon-rotate{
+    transform: rotate(-180deg);
+    transition: transform 250ms ease-out;
+}
+.icon{
+    transform: rotate(0deg);
+    transition: transform 250ms;
+}
+
+
+
+/* confirmation page */
+
+.confirmation-section {
+    /* min-height: 100vh; */
+    /* overflow: hidden; */
+    position: relative;
+    margin-bottom: 5em;
+
+}
+
+.confirmation-bg-image > img,
+.confirmation-bg-frame > svg{
+    position: absolute;
+    z-index: -1;
+    max-height: 52em;
+}
+
+.confirmation-bg-frame > svg,
+.confirmation-bg-pattern > svg{
+    top: 0;
+    right: 0;
+}
+
+.confirmation-bg-frame > svg {
+    fill: var(--clr-black);
+}
+
+.confirmation-bg-pattern > svg {
+    position: absolute;
+    z-index: -1;
+    top: 4em;
+    right: 6em;
+    fill: var(--clr-yellow);
+    max-height: 35em;
+    opacity: .25;
+}
+
+.confirmation-section {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;    
+}
+
+.confirmation-section .container {
+    padding-top: 5em;
+}
+
+.confirmation-section .container form .fields{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2em;
+    padding-right: 5em;
+    margin-bottom: 2em;
+}
+
+.booking-data {
+    width: 320px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+hr{
+    border: 2px solid var(--clr-yellow);
+    margin-top: 5em;
+    margin-bottom: -5em;
+    margin-left: -50em;
+}
+
+/* inputs */
+
+.field{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.booking-data span{
+    font-family: var(--ff-primary);
+    font-size: var(--fs-200);
+    color: var(--clr-light);
+    font-weight: var(--fw-100);
+}
+
+input, 
+textarea {
+    width: 320px;
+    padding: 0.5em;
+    background-color: var(--clr-light);
+    border: none;
+    font-family: var(--ff-primary);
+    color: var(--clr-black);
+    font-size: var(--fs-200);
+    border-radius: 5px;
+}
+
+input:focus, 
+textarea:focus{
+    outline: 2px solid var(--clr-yellow);
+}
+
+input:focus-visible, 
+textarea:focus-visible{
+    outline: 2px solid var(--clr-yellow);
+}
+
+textarea{
+    height: 120px;
+}
+
+
+input[type='checkbox']{
+    width: 1em;
+    height: 1em;
+}
+
+
+.checkbox {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
