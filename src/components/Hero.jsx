@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from './Button'
+import { Link } from 'react-router-dom'
 
 const Hero = () => {
   return (
@@ -24,8 +25,10 @@ const Hero = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
         </p>
         <div className="btns">
-          <Button name={`Order Now`} />
-          <Button name={`Reserve a Table`} />
+          <Button>Order Now</Button>
+          <Link to='/reservation'>
+            <Button>Reserve a table</Button>
+          </Link>
         </div>
       </div>
     </section>

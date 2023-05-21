@@ -1,7 +1,71 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Button from '../components/Button'
+import Modal from '../components/Modal'
+import * as Yup from 'yup'
+import { Formik, useFormik } from 'formik'
+import { useAlertContext } from '../context/alertContext'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const ConfirmationPage = () => {
+
+    const [success,setSuccess] = useState(false)
+    const{onOpen} = useAlertContext()
+
+    const data = localStorage.getItem('booking')
+    const bookingData = JSON.parse(data)
+
+    useEffect(()=>{
+        console.log(bookingData)
+    },[])
+
+const formik = useFormik({
+    initialValues: {
+        firstName: '',
+        lastName:'',
+        email: '',
+        phone: '', 
+        comment: '',
+        date: bookingData.date,
+        time:bookingData.time,
+        diners:bookingData.diners,
+        occasion:'birthday',
+        policy:false,
+    },
+    onSubmit: (values) => {
+        console.log(values)
+        setSuccess(true)
+        localStorage.removeItem('booking')
+    },
+    validationSchema: Yup.object({
+        firstName:Yup.string()
+            .required('Please enter your first name!')
+            .min(2,`must be at least 3 characters long`),
+        lastName:Yup.string()
+            .required('Please enter your last name!'),
+        email:Yup.string()
+            .email('Invalid email address!')
+            .required('Please enter your email!'),
+        phone:Yup.number('enter only numbers!')
+            .required('Please enter your first name!')
+            .min(11, `must be at least 11 characters long`),
+        policy: Yup.boolean().oneOf([true], 'You need to accept the terms and conditions'),
+        date: Yup.string(),
+        time: Yup.string(),
+        occasion: Yup.string(),
+        diners: Yup.string(),
+        })
+    })
+
+
+    useEffect(() => {
+        if(success){
+            onOpen('Success!', 'Thanks for your patient!')
+            formik.resetForm()
+        }
+    },[success])
+
+
+
   return (
     <section className='confirmation-section'>
         <div className="confirmation-bg-image">
@@ -17,41 +81,144 @@ const ConfirmationPage = () => {
             <h1 className="ff-secondary fw-regular fs-3xl text-yellow">
                 Confirm booking
             </h1>
-            <form action="">
+            <form onSubmit={formik.handleSubmit}>
                 <div className="fields">
                     <div className="field">
                         <label htmlFor="firstName">First Name<sup>✻</sup></label>
-                        <input type="text" name="firstName" id="firstname" required />
+                        <input 
+                            type="text" 
+                            name="firstName" 
+                            id="firstname"
+                            value={formik.values.firstName}
+                            className={!!formik.errors.firstName && formik.touched.firstName && 'invalid-border'}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            {...formik.getFieldHelpers('firstName')}
+                        />
+                        {
+                            !!formik.errors.firstName && formik.touched.firstName &&
+                                <span className="error-msg">{formik.errors.firstName}</span>
+
+                        }
                     </div>
                     <div className="field">
                         <label htmlFor="lastName">Last Name<sup>✻</sup></label>
-                        <input type="text" name="lastName" id="lastname" required />
+                        <input 
+                            type="text" 
+                            name="lastName" 
+                            id="lastname"
+                            value={formik.values.lastName}
+                            className={!!formik.errors.lastName && formik.touched.lastName && 'invalid-border'}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            {...formik.getFieldHelpers('lastName')}
+                        />
+                        {
+                            !!formik.errors.lastName && formik.touched.lastName &&
+                                <span className="error-msg">{formik.errors.lastName}</span>
+                        }
                     </div>
                     <div className="field">
                         <label htmlFor="email">Email<sup>✻</sup></label>
-                        <input type="email" name="email" id="email" required />
+                        <input 
+                            type="email" 
+                            name="email" 
+                            id="email"
+                            value={formik.values.email}
+                            className={!!formik.errors.email && formik.touched.email && 'invalid-border'}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            {...formik.getFieldHelpers('email')}
+                        />
+                        {
+                            !!formik.errors.email && formik.touched.email &&
+                                <span className="error-msg">{formik.errors.email}</span>
+                        }
                     </div>
                     <div className="field">
                         <label htmlFor="phone">Phone Number<sup>✻</sup></label>
-                        <input type='phone' name="phone" id="phone" required />
+                        <input 
+                            type='phone'
+                            name="phone" 
+                            id="phone" 
+                            value={formik.values.phone}
+                            className={!!formik.errors.phone && formik.touched.phone && 'invalid-border'}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            {...formik.getFieldHelpers('phone')}
+                        />
+                        {
+                            !!formik.errors.phone && formik.touched.phone &&
+                                <span className="error-msg">{formik.errors.phone}</span>
+                        }
                     </div>
                     <div className="booking-data">
-                        <span>28-02-2023</span>
-                        <span>4 diners</span>
-                        <span>Birthday</span>
-                        <span>06.30 PM</span>
-                        <span>Indoor</span>
+                        <span 
+                            onChange={formik.handleChange}
+                            name='date' 
+                        >
+                            {bookingData.date}
+                        </span>
+                        <span
+                            name='diners'
+                            onChange={formik.handleChange}
+                        >
+                            {bookingData.diners}
+                        </span>
+                        <span
+                            name='occasion'
+                            onChange={formik.handleChange}
+                        >
+                            {bookingData.occasion}
+                        </span>
+                        <span
+                            name='time'
+                            onChange={formik.handleChange}
+                        >
+                            {bookingData.time}
+                        </span>   
+                        <span
+                            name='seating'
+                            onChange={formik.handleChange}
+                        >
+                            {bookingData.seating}
+                        </span>
                     </div>
                     <div className="field">
                         <label htmlFor="comment">Comment</label>
-                        <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+                        <textarea 
+                            name="comment" 
+                            id="comment" 
+                            cols="30" 
+                            rows="10"
+                            onChange={formik.handleChange}
+                        >
+                        </textarea>
                     </div>
-                    <div className="field checkbox">
-                        <input type="checkbox" name="policy" id="policy" />
+                    <div 
+                        className={`field checkbox`}
+                    >
+                        <input 
+                            type="checkbox" 
+                            name="policy" 
+                            id="policy" 
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            {...formik.getFieldHelpers('policy')}
+                        />
                         <label htmlFor="policy">I agree with <em>friendly policy</em> with little lemon</label>
+                        {
+                            !!formik.errors.policy && formik.touched.policy &&
+                                <span className="error-msg">{formik.errors.policy}</span>
+                        }
                     </div>
                 </div>
-                <Button>Confirm Booking</Button>
+                <Button 
+                    type={`submit`}
+                    id='btn-modal'
+                >
+                    Confirm Booking
+                </Button>
             </form>
             <hr />
         </div>

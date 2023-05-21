@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
+import { Link, NavLink } from 'react-router-dom'
 
 const Header = () => {
 
@@ -25,11 +26,11 @@ const Header = () => {
       <input type="checkbox" className='nav-toggle' name="nav-toggle" id="nav-toggle" />
       <nav className='nav ff-primary fs-s text-light' ref={headerRef}>
         <ul role='list'>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Online Order</a></li>
-          <li><a href="#">Reservations</a></li>
-          <li><a href="#">Login</a></li>
+          <li><NavLink to='/'>Home</NavLink></li>
+          <li><NavLink to='/about'>About</NavLink></li>
+          <li><NavLink to='/online-menu'>Online Order</NavLink></li>
+          <li><NavLink to='/reservation'>Reservations</NavLink></li>
+          <li><NavLink to='/login'>Login</NavLink></li>
         </ul>
       </nav>
       <label htmlFor="nav-toggle" className='nav-toggle-label'>

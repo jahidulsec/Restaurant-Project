@@ -263,6 +263,8 @@ header{
     width: 100%;
 }
 
+
+
 .view-nav{
     background-color: var(--clr-black);
 }
@@ -402,6 +404,8 @@ nav a{
         color: var(--clr-yellow);
     }
 
+    
+
     nav a::after{
         content: '';
         display: block;
@@ -419,6 +423,11 @@ nav a{
     nav a:hover::after{
         transform: scale(1,1);
     }
+
+    nav a.active::after{
+        transform: scale(1,1);
+    }
+
 
     .cart-icon {
         all: unset;
@@ -874,7 +883,7 @@ nav a{
     /* min-height: 100vh; */
     /* overflow: hidden; */
     position: relative;
-    margin-bottom: 2em;
+    /* margin-bottom: 2em; */
 
 }
 
@@ -918,8 +927,9 @@ nav a{
 .reservation-section .container form{
     display: flex;
     flex-direction: column;
+    align-items: start;
     flex-wrap: wrap;
-    padding: 2em 0 8em 1em;
+    padding: 2em 0 2em 1em;
     gap: 2em;
 
 }
@@ -929,6 +939,14 @@ nav a{
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 2em;
+    margin-bottom: 2em;
+}
+
+.reservation-section hr{
+    border: 2px solid var(--clr-yellow);
+    margin-top: 5em;
+    margin-right: -5em;
+    margin-left: -50em;
 }
 
 
@@ -988,6 +1006,7 @@ input[type='date']{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
     padding: 1em;
     border-radius: 5px;
     filter: drop-shadow(0.1em 0.1em 0.01em var(--clr-light));
@@ -1002,6 +1021,7 @@ input[type='date']{
 
 .dropdown ul {
     margin-top: 5px;
+    list-style: none;
 
 }
 
@@ -1088,12 +1108,16 @@ input[type='date']{
 }
 
 .booking-data {
-    width: 320px;
+    width: 20em;
     display: grid;
     grid-template-columns: repeat(2,1fr);
 }
 
-hr{
+.booking-data > span {
+    text-transform: capitalize;
+}
+
+.confirmation-section hr{
     border: 2px solid var(--clr-yellow);
     margin-top: 5em;
     margin-bottom: -5em;
@@ -1117,7 +1141,7 @@ hr{
 
 input, 
 textarea {
-    width: 320px;
+    width: 18em;
     padding: 0.5em;
     background-color: var(--clr-light);
     border: none;
@@ -1138,7 +1162,7 @@ textarea:focus-visible{
 }
 
 textarea{
-    height: 120px;
+    height: 7.5em;
 }
 
 
@@ -1150,7 +1174,109 @@ input[type='checkbox']{
 
 .checkbox {
     flex-direction: row;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     gap: 1em;
+    max-width: 30rem;
+    flex-wrap: wrap;
+}
+
+
+/* error message box */
+.error-msg{
+    font-family: var(--ff-primary);
+    font-size: var(--fs-100);
+    color: var(--clr-yellow);
+}
+
+.invalid-border{
+    border: 2px solid var(--clr-yellow);
+}
+
+
+
+
+/* modal */
+
+.modal{
+    width: 26.875rem;
+    border-radius: 4.6875rem;
+    padding: 5em;
+    inset: 0;
+    margin: auto;
+    background-color: var(--clr-yellow);
+    border: none;
+    text-align: center;
+}
+
+dialog::backdrop{
+    background: var(--clr-black);
+    opacity: 0.5;
+}
+
+
+
+
+
+
+
+/* date picker */
+
+.date-input{
+    position: relative;
+}
+
+
+.date-picker {
+    background-color: var(--clr-light);
+    max-width: 25rem;
+    padding: 1rem;
+    border-radius: 10px;
+    position: absolute;
+    top: 6em;
+    z-index: 111;
+    /* filter: drop-shadow(0.1em 0.1em 0rem var(--clr-yellow)); */
+}
+
+.picker-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2em;
+    color: var(--text-clr-dark);
+}
+
+.picker-header .icons{
+    display: flex;
+    gap: 1rem;
+}
+
+.picker-header .icons > svg{
+    cursor: pointer;
+}
+
+.picker-body{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    place-items: center;
+    gap: 0.875rem;
+    font-family: var(--ff-primary);
+    font-size: var(--fs-100);
+}
+
+.day-name{
+    font-weight: var(--fw-500);
+    color: var(--text-clr-dark);
+}
+
+.day-number{
+    width: 2rem;
+    aspect-ratio: 1;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.day-number:hover, .day-selected{
+    cursor: pointer;
+    background-color: var(--clr-yellow);
 }

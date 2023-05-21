@@ -11,7 +11,7 @@ const MenuSection2 = () => {
         <p className="desc ff-primary text-light fs-l">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
         </p>
-        <Button name={`Order Now`} />
+        <Button>Order Now</Button>
       </div>
       <div className="menu-item2-img">
         <img src="Image/shawarma.jpg" alt="item-Image" />

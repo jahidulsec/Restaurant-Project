@@ -1,13 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RadioGroup, RadioOption } from '../components/RadioGroup/Radio'
 import {DropDownGroup, DropDownItem} from '../components/DropDown'
 import { faChampagneGlasses, faClock, faUser } from '@fortawesome/free-solid-svg-icons'
 import Button from '../components/Button'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import DatePicker from '../components/DatePicker'
 
 const Reservation = () => {
 
-    const [selected, setSelected] = useState("")
+    const [booking, setBooking] = useState({
+        occasion: '',
+        diners:'',
+        date:'',
+        time:'',
+        seating: '',
+    })
 
+    const navigation = useNavigate()
+
+    useEffect(()=>{
+        console.log(booking, location)
+    },[booking])
+
+    const handleDate = (date) => {
+        setBooking({
+            ...booking,
+            date: date,
+        })
+    }
+
+    const handleNavigation = () => {
+        localStorage.setItem('booking',JSON.stringify(booking))
+        navigation('/confirmation')
+    }
 
   return (
     <section className='reservation-section'>
@@ -25,18 +50,36 @@ const Reservation = () => {
                 Reserve a Table
             </h1>
             <form action="">
-                <RadioGroup onChange={setSelected}  selected={selected}>
+                <RadioGroup 
+                    onChange={(e)=> {
+                        setBooking({
+                            ...booking,
+                            seating: e.target.value
+                        })
+                    }}  
+                    selected={booking.seating}
+                >
                     <RadioOption value='indoor'>Indoor Seating</RadioOption>
                     <RadioOption value='outdoor'>Outdoor Seating</RadioOption>
                 </RadioGroup>
                 <div className='fields'>
                     <div className="field">
-                        <label htmlFor="date">Date</label>
-                        <input type="date" name="date" id="date" placeholder='Date' />
+                        <DatePicker
+                            onDate = {handleDate}
+                        />
                     </div>
                     <div className="field">
                         <h4 className="field-label">Number of Diners</h4>
-                        <DropDownGroup label={`No. of Diners`} icon={faUser} >
+                        <DropDownGroup 
+                            label={`No. of Diners`} 
+                            icon={faUser} 
+                            onClick={(e)=> {
+                                setBooking({
+                                    ...booking,
+                                    diners: e.target.id + ' diners'
+                                })
+                            }}
+                        >
                             <DropDownItem value={2}>2 Diners</DropDownItem>
                             <DropDownItem value={4}>4 Diners</DropDownItem>
                             <DropDownItem value={6}>6 Diners</DropDownItem>
@@ -45,26 +88,52 @@ const Reservation = () => {
                     </div>
                     <div className="field">
                         <h4 className="field-label">Occasion</h4>
-                        <DropDownGroup label={`Occasion`} icon={faChampagneGlasses} >
-                            <DropDownItem value={`Birthday`}>Birthday</DropDownItem>
-                            <DropDownItem value={`Anniversary`}>Anniversary</DropDownItem>
-                            <DropDownItem value={`Engagement`}>Engagement</DropDownItem>
+                        <DropDownGroup 
+                            label={`Occasion`} 
+                            icon={faChampagneGlasses} 
+                            onClick={(e)=>{
+                                setBooking({
+                                    ...booking,
+                                    occasion: e.target.id
+                                    }
+                                )
+                            }}
+                        >
+                            <DropDownItem value={`birthday`}>Birthday</DropDownItem>
+                            <DropDownItem value={`anniversary`}>Anniversary</DropDownItem>
+                            <DropDownItem value={`engagement`}>Engagement</DropDownItem>
                         </DropDownGroup>
                     </div>
                     <div className="field">
                         <h4 className="field-label">Time</h4>
-                        <DropDownGroup label={`Time`} icon={faClock} >
+                        <DropDownGroup 
+                            label={`Time`} 
+                            icon={faClock} 
+                            onClick={(e)=>{
+                                setBooking({
+                                    ...booking,
+                                    time: e.target.id
+                                })
+                            }}    
+                        >
                             <DropDownItem value={`18:00`}>6:00 PM</DropDownItem>
                             <DropDownItem value={`19:00`}>7:00 PM</DropDownItem>
                             <DropDownItem value={`19:30`}>7:30 PM</DropDownItem>
                             <DropDownItem value={`20:00`}>8:00 PM</DropDownItem>
                         </DropDownGroup>
                     </div>
-                    <Button>Reserve a Table</Button>
                 </div>
+                <Link to='/confirmation'>
+                    <button
+                        className='btn-yellow' 
+                        onClick={handleNavigation}
+                    >
+                        Reserve a Table
+                    </button>
+                </Link>
             </form>
+            <hr />
         </div>
-    
     </section>
   )
 }
