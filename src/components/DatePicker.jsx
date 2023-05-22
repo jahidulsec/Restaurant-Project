@@ -4,14 +4,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import { MonthNames, dayRange, getNumberOfDaysInMonth, getSortedDay } from '../data'
 
 
-const DatePicker = ({onDate}) => {
+const DatePicker = ({onDate, onSelected, onLabel}) => {
     const date = new Date()
     const [currentMonth, setCurrentMonth] = useState(date.getMonth())
     const [currentYear, setCurrentYear] = useState(date.getFullYear())
     const [selectedDate, setSelectedDate] = useState(date.getDate())
-    const [selected, setSelected] = useState(false)
+    const [selected, setSelected] = useState(onSelected)
     const [open, setOpen] = useState(false)
-    const [viewDate, setViewDate] = useState("Date")
+    const [viewDate, setViewDate] = useState(onLabel)
 
     const datePickerRef = useRef(undefined)
 

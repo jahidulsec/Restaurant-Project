@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useRef, useState } from 'react'
 
 
-export const DropDownGroup = ({children, label, icon, onClick}) => {
+export const DropDownGroup = ({children, label, icon, onClick, onSelected}) => {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState(label)
-  const [selected, setSelected] = useState(false)
+  const [selected, setSelected] = useState(onSelected)
 
   const dropDownRef = useRef(undefined)
   const listRef = useRef(undefined)

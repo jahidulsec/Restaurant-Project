@@ -24,6 +24,16 @@ export const dayNames = [
     "Sat"
 ]
 
+export const fullDayNames = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thusday",
+    "Friday",
+    "Saturday"
+]
+
 
 export const getNumberOfDaysInMonth = (year, month) => {
     return new Date(year, month + 1, 0).getDate()

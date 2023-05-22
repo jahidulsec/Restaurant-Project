@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { RadioGroup, RadioOption } from '../components/RadioGroup/Radio'
 import {DropDownGroup, DropDownItem} from '../components/DropDown'
 import { faChampagneGlasses, faClock, faUser } from '@fortawesome/free-solid-svg-icons'
-import Button from '../components/Button'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import DatePicker from '../components/DatePicker'
 
 const Reservation = () => {
@@ -18,9 +17,23 @@ const Reservation = () => {
 
     const navigation = useNavigate()
 
+    const data = localStorage.getItem('booking')
+    const bookingData = JSON.parse(data)
+
+
     useEffect(()=>{
-        console.log(booking, location)
-    },[booking])
+        console.log(booking, location, bookingData)
+        if(bookingData){
+            setBooking({
+                ...booking,
+                date: bookingData.date,
+                time: bookingData.time,
+                diners: bookingData.diners,
+                occasion: bookingData.occasion,
+                seating: bookingData.seating
+            })
+        }
+    },[])
 
     const handleDate = (date) => {
         setBooking({
@@ -65,31 +78,35 @@ const Reservation = () => {
                 <div className='fields'>
                     <div className="field">
                         <DatePicker
+                            onSelected={bookingData === null ? false : bookingData.date}
+                            onLabel={bookingData === null ?'Date' : bookingData.date ? bookingData.date : 'Date'}
                             onDate = {handleDate}
                         />
                     </div>
                     <div className="field">
                         <h4 className="field-label">Number of Diners</h4>
                         <DropDownGroup 
-                            label={`No. of Diners`} 
+                            label={bookingData === null ?'No of Diners' : bookingData.diners ? bookingData.diners : 'No of Diners'} 
                             icon={faUser} 
+                            onSelected={bookingData === null ? false : bookingData.diners}
                             onClick={(e)=> {
                                 setBooking({
                                     ...booking,
-                                    diners: e.target.id + ' diners'
+                                    diners: e.target.id
                                 })
                             }}
                         >
-                            <DropDownItem value={2}>2 Diners</DropDownItem>
-                            <DropDownItem value={4}>4 Diners</DropDownItem>
-                            <DropDownItem value={6}>6 Diners</DropDownItem>
-                            <DropDownItem value={8}>8 Diners</DropDownItem>
+                            <DropDownItem value={`2 diners`}>2 Diners</DropDownItem>
+                            <DropDownItem value={`4 diners`}>4 Diners</DropDownItem>
+                            <DropDownItem value={`6 diners`}>6 Diners</DropDownItem>
+                            <DropDownItem value={`8 diners`}>8 Diners</DropDownItem>
                         </DropDownGroup>
                     </div>
                     <div className="field">
                         <h4 className="field-label">Occasion</h4>
                         <DropDownGroup 
-                            label={`Occasion`} 
+                            label={bookingData === null ?'Occasion' : bookingData.occasion ? bookingData.occasion : 'Occasion'} 
+                            onSelected={bookingData === null ? false : bookingData.occasion}
                             icon={faChampagneGlasses} 
                             onClick={(e)=>{
                                 setBooking({
@@ -107,8 +124,9 @@ const Reservation = () => {
                     <div className="field">
                         <h4 className="field-label">Time</h4>
                         <DropDownGroup 
-                            label={`Time`} 
+                            label={bookingData === null ? 'Time' : bookingData.time ? bookingData.time : 'Time'}  
                             icon={faClock} 
+                            onSelected={bookingData === null ? false : bookingData.time}
                             onClick={(e)=>{
                                 setBooking({
                                     ...booking,
@@ -116,10 +134,10 @@ const Reservation = () => {
                                 })
                             }}    
                         >
-                            <DropDownItem value={`18:00`}>6:00 PM</DropDownItem>
-                            <DropDownItem value={`19:00`}>7:00 PM</DropDownItem>
-                            <DropDownItem value={`19:30`}>7:30 PM</DropDownItem>
-                            <DropDownItem value={`20:00`}>8:00 PM</DropDownItem>
+                            <DropDownItem value={`6:00 PM`}>6:00 PM</DropDownItem>
+                            <DropDownItem value={`7:00 PM`}>7:00 PM</DropDownItem>
+                            <DropDownItem value={`7:30 PM`}>7:30 PM</DropDownItem>
+                            <DropDownItem value={`8:00 PM`}>8:00 PM</DropDownItem>
                         </DropDownGroup>
                     </div>
                 </div>

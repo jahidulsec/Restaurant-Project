@@ -5,14 +5,22 @@ import * as Yup from 'yup'
 import { Formik, useFormik } from 'formik'
 import { useAlertContext } from '../context/alertContext'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalendar, faChampagneGlasses, faClock, faTriangleExclamation, faUser } from '@fortawesome/free-solid-svg-icons'
 
 const ConfirmationPage = () => {
 
     const [success,setSuccess] = useState(false)
-    const{onOpen} = useAlertContext()
+    const{onOpen, onClose} = useAlertContext()
+
+    const navigator = useNavigate()
 
     const data = localStorage.getItem('booking')
     const bookingData = JSON.parse(data)
+
+    const handleNavigate = () => {
+        navigator('/reservation')
+    }
 
     useEffect(()=>{
         console.log(bookingData)
@@ -26,15 +34,15 @@ const formik = useFormik({
         phone: '', 
         comment: '',
         date: bookingData.date,
-        time:bookingData.time,
-        diners:bookingData.diners,
-        occasion:'birthday',
+        time: bookingData.time,
+        diners: bookingData.diners,
+        occasion: bookingData.occasion,
+        seating: bookingData.seating,
         policy:false,
     },
     onSubmit: (values) => {
         console.log(values)
         setSuccess(true)
-        localStorage.removeItem('booking')
     },
     validationSchema: Yup.object({
         firstName:Yup.string()
@@ -53,6 +61,7 @@ const formik = useFormik({
         time: Yup.string(),
         occasion: Yup.string(),
         diners: Yup.string(),
+        seating: Yup.string(),
         })
     })
 
@@ -61,9 +70,34 @@ const formik = useFormik({
         if(success){
             onOpen('Success!', 'Thanks for your patient!')
             formik.resetForm()
+            setTimeout(() => {
+                navigator('/')
+                onClose()
+                localStorage.clear()
+            }, [5000])
         }
     },[success])
 
+
+
+    const handleSubmit = () => {
+        if (!bookingData.time) {
+            return true
+        }
+        if (!bookingData.seating) {
+            return true
+        }
+        if (!bookingData.date) {
+            return true
+        }
+        if (!bookingData.occasion) {
+            return true
+        }
+        if (!bookingData.diners) {
+            return true
+        }
+        return false
+    }
 
 
   return (
@@ -91,6 +125,7 @@ const formik = useFormik({
                             id="firstname"
                             value={formik.values.firstName}
                             className={!!formik.errors.firstName && formik.touched.firstName && 'invalid-border'}
+                            placeholder='First name'
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             {...formik.getFieldHelpers('firstName')}
@@ -107,6 +142,7 @@ const formik = useFormik({
                             type="text" 
                             name="lastName" 
                             id="lastname"
+                            placeholder='Last name'
                             value={formik.values.lastName}
                             className={!!formik.errors.lastName && formik.touched.lastName && 'invalid-border'}
                             onChange={formik.handleChange}
@@ -124,6 +160,7 @@ const formik = useFormik({
                             type="email" 
                             name="email" 
                             id="email"
+                            placeholder='you@company.com'
                             value={formik.values.email}
                             className={!!formik.errors.email && formik.touched.email && 'invalid-border'}
                             onChange={formik.handleChange}
@@ -141,6 +178,7 @@ const formik = useFormik({
                             type='phone'
                             name="phone" 
                             id="phone" 
+                            placeholder='+880 1234 123 123'
                             value={formik.values.phone}
                             className={!!formik.errors.phone && formik.touched.phone && 'invalid-border'}
                             onChange={formik.handleChange}
@@ -153,42 +191,117 @@ const formik = useFormik({
                         }
                     </div>
                     <div className="booking-data">
-                        <span 
-                            onChange={formik.handleChange}
-                            name='date' 
+                    <div
+                            name='date'
+                            className={formik.errors.date ? 'error-msg' : ""}
+                            onClick={handleNavigate}
                         >
-                            {bookingData.date}
-                        </span>
-                        <span
-                            name='diners'
-                            onChange={formik.handleChange}
-                        >
-                            {bookingData.diners}
-                        </span>
-                        <span
-                            name='occasion'
-                            onChange={formik.handleChange}
-                        >
-                            {bookingData.occasion}
-                        </span>
-                        <span
+                            {!!bookingData.date ?
+                                <>
+                                    <FontAwesomeIcon icon={faCalendar} />
+                                    <span>
+                                        {formik.values.date}
+                                    </span> 
+                                </> :
+                                <>
+                                    <FontAwesomeIcon color='#ffc200' icon={faCalendar} />
+                                    <span className="field-error-msg">
+                                        <FontAwesomeIcon icon={faTriangleExclamation} />
+                                        Select Date
+                                    </span>    
+                                </>
+                            }
+                        </div> 
+                        <div
                             name='time'
                             onChange={formik.handleChange}
+                            className={formik.errors.time ? 'error-msg' : ""}
+                            onClick={handleNavigate}
                         >
-                            {bookingData.time}
-                        </span>   
-                        <span
-                            name='seating'
+                            {!!bookingData.time ?
+                                <>
+                                    <FontAwesomeIcon icon={faClock} />
+                                    <span>
+                                        {formik.values.time}
+                                    </span> 
+                                </> :
+                                <>
+                                    <FontAwesomeIcon color='#ffc200' icon={faClock} />
+                                    <span className="field-error-msg">
+                                        <FontAwesomeIcon icon={faTriangleExclamation} />
+                                        Select Time
+                                    </span>    
+                                </>
+                            }
+                        </div> 
+                        <div
+                            name='occasion'
                             onChange={formik.handleChange}
+                            className={formik.errors.occasion ? 'error-msg' : ""}
+                            onClick={handleNavigate}
                         >
-                            {bookingData.seating}
-                        </span>
+                            {!!bookingData.occasion ?
+                                <>
+                                    <FontAwesomeIcon icon={faChampagneGlasses} />
+                                    <span>
+                                        {formik.values.occasion}
+                                    </span> 
+                                </> :
+                                <>
+                                    <FontAwesomeIcon color='#ffc200' icon={faChampagneGlasses} />
+                                    <span className="field-error-msg">
+                                        <FontAwesomeIcon icon={faTriangleExclamation} />
+                                        Select Occasion
+                                    </span>    
+                                </>
+                            }
+                        </div> 
+                        <div
+                            name='time'
+                            onChange={formik.handleChange}
+                            onClick={handleNavigate}
+                            className={formik.errors.time ? 'error-msg' : ""}
+                        >
+                            {!!bookingData.diners ?
+                                <>
+                                    <FontAwesomeIcon icon={faUser} />
+                                    <span>
+                                        {formik.values.diners}
+                                    </span> 
+                                </> :
+                                <>
+                                    <FontAwesomeIcon color='#ffc200' icon={faUser} />
+                                    <span className="field-error-msg">
+                                        <FontAwesomeIcon icon={faTriangleExclamation} />
+                                        Select Diners
+                                    </span>    
+                                </>
+                            }
+                        </div> 
+                            
+                        
+                        { !!bookingData.seating ? 
+                            <div
+                                name='seating'
+                                onChange={formik.handleChange}
+                            >
+                                {formik.values.seating}
+                            </div> :
+                            <span 
+                                className="field-error-msg" 
+                                onClick={handleNavigate}
+                            >
+                                <FontAwesomeIcon icon={faTriangleExclamation} />
+                                Select Location
+                            </span>
+                        } 
                     </div>
                     <div className="field">
                         <label htmlFor="comment">Comment</label>
                         <textarea 
                             name="comment" 
                             id="comment" 
+                            placeholder='Comment'
                             cols="30" 
                             rows="10"
                             onChange={formik.handleChange}
@@ -213,12 +326,14 @@ const formik = useFormik({
                         }
                     </div>
                 </div>
-                <Button 
+                <button 
+                    className='btn-yellow'
                     type={`submit`}
                     id='btn-modal'
+                    disabled={handleSubmit()}
                 >
                     Confirm Booking
-                </Button>
+                </button>
             </form>
             <hr />
         </div>

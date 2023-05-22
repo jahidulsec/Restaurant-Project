@@ -253,6 +253,11 @@ select {
     transform: scale(1,1);
 }
 
+.btn-yellow:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
 
 /* header section */
 
@@ -1102,18 +1107,18 @@ input[type='date']{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 2em;
+    gap: 1em;
     padding-right: 5em;
     margin-bottom: 2em;
 }
 
 .booking-data {
-    width: 20em;
+    width: 21em;
     display: grid;
     grid-template-columns: repeat(2,1fr);
 }
 
-.booking-data > span {
+.booking-data > div {
     text-transform: capitalize;
 }
 
@@ -1132,23 +1137,29 @@ input[type='date']{
     align-items: start;
 }
 
-.booking-data span{
+.booking-data div{
     font-family: var(--ff-primary);
     font-size: var(--fs-200);
     color: var(--clr-light);
     font-weight: var(--fw-100);
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
 }
 
 input, 
-textarea {
-    width: 18em;
-    padding: 0.5em;
+textarea,
+input::placeholder,
+textarea::placeholder {
+    width: 19em;
+    padding: 0.85em;
     background-color: var(--clr-light);
     border: none;
     font-family: var(--ff-primary);
     color: var(--clr-black);
     font-size: var(--fs-200);
     border-radius: 5px;
+    font-size: var(--fs-100);
 }
 
 input:focus, 
@@ -1186,6 +1197,17 @@ input[type='checkbox']{
 .error-msg{
     font-family: var(--ff-primary);
     font-size: var(--fs-100);
+    color: var(--clr-yellow);
+}
+
+.field-error-msg{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-family: var(--ff-primary);
+    font-size: 14px;
     color: var(--clr-yellow);
 }
 
