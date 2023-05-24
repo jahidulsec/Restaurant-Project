@@ -70,10 +70,12 @@ const formik = useFormik({
         if(success){
             onOpen('Success!', 'Thanks for your patient!')
             formik.resetForm()
-            setTimeout(() => {
+            setTimeout(()=>{
                 navigator('/')
+            },[4000])
+            setTimeout(() => {
                 onClose()
-                localStorage.clear()
+                localStorage.removeItem("booking")
             }, [5000])
         }
     },[success])
