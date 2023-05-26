@@ -1,19 +1,17 @@
 import React from 'react'
 
-const MenuCard = () => {
+const MenuCard = ({ name, desc, imgUrl, price}) => {
   return (
     <div className='menu-card'>
-        <img className='menu-img' src="Image/fried-pork.jpg" alt="menuImage" />
+        <img className='menu-img' src={imgUrl} alt={name} />
         <div className="card-header">
             <h4 className='ff-secondary fs-xl fw-regular'>
-                Fried Pork
+                {name}
             </h4>
-            <span className="price text-yellow ff-primary fw-bold fs-l">$12.00</span>
+            <span className="price text-yellow ff-primary fw-bold fs-l">${Number(price).toFixed(2)}</span>
         </div>
         <p className="card-desc ff-primary fs-s fw-regular">
-            The famous greek salad of crispy lettuce, 
-            peppers, olives and our Chicago style feta cheese, 
-            garnished with crunchy garlic and rosemary croutons. 
+            {desc} 
         </p>
         <button className='btn-yellow'>Add to cart</button>
     </div>

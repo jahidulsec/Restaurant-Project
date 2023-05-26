@@ -1,5 +1,6 @@
 import React from 'react'
 import MenuCard from '../components/MenuCard'
+import { menuItems } from '../data'
 
 const Menu = () => {
   return (
@@ -30,15 +31,17 @@ const Menu = () => {
           </div>
         </div>
         <div className="menu-cards">
-          <MenuCard />
-          <MenuCard />
-          <MenuCard />
-          <MenuCard />
-          <MenuCard />
-          <MenuCard />
-          <MenuCard />
-          <MenuCard />
-          <MenuCard />
+          {
+            menuItems.map( item => (
+              <MenuCard 
+                key={item.id}
+                name={item.name}
+                price={item.price}
+                desc={item.desc}
+                imgUrl={item.imgUrl}
+              />
+            ))
+          }
         </div>
       </div>
     </section>
