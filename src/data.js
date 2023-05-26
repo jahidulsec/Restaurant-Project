@@ -136,3 +136,19 @@ export const menuItems = [
         imgUrl: "https://projectveganbaking.com/wp-content/uploads/2021/04/04.jpeg",
     },
 ]
+
+
+export const category = [
+    {
+        id: 1,
+        name: 'main'
+    },
+    {
+        id: 2,
+        name: 'desserts'
+    },
+    {
+        id: 3,
+        name: 'appetizers'
+    },
+]

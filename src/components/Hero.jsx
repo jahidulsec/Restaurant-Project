@@ -25,7 +25,9 @@ const Hero = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
         </p>
         <div className="btns">
-          <Button>Order Now</Button>
+          <Link to='/online-menu'>
+            <Button>Order Now</Button>
+          </Link>
           <Link to='/reservation'>
             <Button>Reserve a table</Button>
           </Link>

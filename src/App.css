@@ -1425,3 +1425,31 @@ dialog::backdrop{
 .menu-card .btn-yellow::before{
     background-color: var(--clr-red);
 }
+
+.menu-section .pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.pagination-hidden{
+    visibility: hidden;
+}
+
+.btn-pagination{
+    border: none;
+    font-family: var(--ff-primary);
+    border-radius: 5px;
+    padding: 0.125em 0.5em;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.125em;
+}
+
+
+.page-selected {
+    background-color: var(--clr-yellow);
+}
