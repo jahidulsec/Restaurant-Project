@@ -28,12 +28,14 @@ const Menu = ({onAdd}) => {
     setPageNumber(num)
   }
 
+  
+
 
   useEffect(() => {
     
-    let last = currentPage*limit
+    let last = currentPage * limit
     let first = last - limit
-    console.log('first',first, last, pageNumber)
+    // console.log('first',first, last, 'page '+ pageNumber[1])
     setFirstIndex(first)
     setLastIndex(last)
 
@@ -42,7 +44,7 @@ const Menu = ({onAdd}) => {
     }
     handlePageNumber()
 
-  }, [currentPage])
+  }, [catSelected])
 
 
 

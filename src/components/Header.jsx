@@ -38,7 +38,10 @@ const Header = ({cartOpen, cart, cartItems}) => {
       </label>
       <span className='cart-icon' onClick={() => {cartOpen(!cart)}}>
         <AiOutlineShoppingCart size={30} />
-        <span className="cart-num">{cartItems.length}</span>
+        {
+          cartItems.length !== 0 && 
+          <span className="cart-num">{cartItems.length}</span>
+        }
       </span>
     </header>
   )
