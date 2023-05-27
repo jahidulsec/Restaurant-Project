@@ -13,17 +13,17 @@ const BestSeller = () => {
         </p>
         <div className="best-seller-cards">
           <BestSellerCard 
-            name={`Title Here`}
+            name={`Pasta`}
             desc={`Lorem ipsum dolor sit amet, consectetur adipiscing elit`}
             imgUrl={`pasta`}
           />
           <BestSellerCard 
-            name={`Title Here`}
+            name={`Chicken Skewers`}
             desc={`Lorem ipsum dolor sit amet, consectetur adipiscing elit`}
             imgUrl={`chicken-skewers`}
           />
           <BestSellerCard 
-            name={`Title Here`}
+            name={`Shawarma`}
             desc={`Lorem ipsum dolor sit amet, consectetur adipiscing elit`}
             imgUrl={`shawarma`}
           />

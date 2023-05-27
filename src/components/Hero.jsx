@@ -22,7 +22,7 @@ const Hero = () => {
           Little Lemon
         </h1>
         <p className='hero-para ff-primary text-light fs-s'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+          We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.
         </p>
         <div className="btns">
           <Link to='/online-menu'>

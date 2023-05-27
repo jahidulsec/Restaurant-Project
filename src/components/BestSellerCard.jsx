@@ -1,8 +1,13 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const BestSellerCard = ({name, desc, imgUrl}) => {
+
+
+  const navigate = useNavigate()
+
   return (
-    <div className="seller-card">
+    <div className="seller-card" onClick={() => {navigate('/online-menu')}}>
         <img className='seller-card-img' src={`Image/${imgUrl}.jpg`} alt="item-img" />
         <h2 className="seller-card-title fw-regular ff-secondary fs-xl">
             {name}

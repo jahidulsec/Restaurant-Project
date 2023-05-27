@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from './Button'
+import { Link } from 'react-router-dom'
 
 const MenuSection1 = () => {
   return (
@@ -17,7 +18,9 @@ const MenuSection1 = () => {
         <p className="desc ff-primary text-light fs-l">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
         </p>
-        <Button>Order Now</Button>
+        <Link to={`/online-menu`}>
+          <Button>Order Now</Button>
+        </Link>
       </div>
     </section>
   )
