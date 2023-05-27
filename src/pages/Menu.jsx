@@ -4,7 +4,7 @@ import { category, menuItems } from '../data'
 import {AiOutlineRight, AiOutlineLeft} from 'react-icons/ai'
 import { faL, fas } from '@fortawesome/free-solid-svg-icons'
 
-const Menu = () => {
+const Menu = ({onAdd}) => {
 
   const [limit, setLimit] = useState(6)
   const [currentPage, setCurrentPage] = useState(1)
@@ -21,24 +21,29 @@ const Menu = () => {
     return item
   })
 
-  useEffect(() => {
+  const handlePageNumber = () => {
     let numberOfPage = menuItemData.length / limit
     numberOfPage = Math.ceil(numberOfPage)
     let num = Array.from({length: numberOfPage}, (_, i) => i + 1)
     setPageNumber(num)
+  }
 
+
+  useEffect(() => {
+    
     let last = currentPage*limit
     let first = last - limit
-    console.log('first',first, last)
+    console.log('first',first, last, pageNumber)
     setFirstIndex(first)
     setLastIndex(last)
-    console.log(pageNumber[pageNumber.length-1], currentPage)
 
     if (catSelected) {
       setCurrentPage(1)
     }
+    handlePageNumber()
 
-  }, [currentPage, pageNumber])
+  }, [currentPage])
+
 
 
   const handleNext = () => {
@@ -98,6 +103,7 @@ const Menu = () => {
                 price={item.price}
                 desc={item.desc}
                 imgUrl={item.imgUrl}
+                onAdd={onAdd}
               />
             ))
           }

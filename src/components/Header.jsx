@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { Link, NavLink } from 'react-router-dom'
 
-const Header = () => {
+const Header = ({cartOpen, cart, cartItems}) => {
 
   const headerRef = useRef(undefined)
   const [active, setActive] = useState(false)
@@ -36,8 +36,9 @@ const Header = () => {
       <label htmlFor="nav-toggle" className='nav-toggle-label'>
         <span></span>
       </label>
-      <span className='cart-icon'>
+      <span className='cart-icon' onClick={() => {cartOpen(!cart)}}>
         <AiOutlineShoppingCart size={30} />
+        <span className="cart-num">{cartItems.length}</span>
       </span>
     </header>
   )
