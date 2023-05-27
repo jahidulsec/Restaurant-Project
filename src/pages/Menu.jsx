@@ -44,7 +44,7 @@ const Menu = ({onAdd}) => {
     }
     handlePageNumber()
 
-  }, [catSelected])
+  }, [currentPage,catSelected])
 
 
 
