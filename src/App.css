@@ -1332,7 +1332,7 @@ dialog::backdrop{
 .menu-section > .header{
     display: flex;
     flex-direction: column;
-    background-image: url("Image/grilled-meat.jpg");
+    background-image: url("https://res.cloudinary.com/dhmh6d8si/image/upload/v1685201152/littleLemon/grilled-meat_pckrbi.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     padding: 7em 5em 2rem;
