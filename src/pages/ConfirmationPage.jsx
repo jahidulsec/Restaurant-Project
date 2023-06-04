@@ -15,7 +15,7 @@ const ConfirmationPage = () => {
 
     const navigator = useNavigate()
 
-    const data = localStorage.getItem('booking')
+    const data = sessionStorage.getItem('booking')
     const bookingData = JSON.parse(data)
 
     const handleNavigate = () => {
@@ -74,8 +74,8 @@ const formik = useFormik({
                 navigator('/')
             },[4000])
             setTimeout(() => {
-                onClose()
-                localStorage.removeItem("booking")
+                // onClose()
+                sessionStorage.removeItem("booking")
             }, [5000])
         }
     },[success])

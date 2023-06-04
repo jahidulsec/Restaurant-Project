@@ -13,6 +13,7 @@ import { AlertProvider } from './context/alertContext'
 import Modal from './components/Modal'
 import About from './components/About'
 import Cart from './components/Cart'
+import ScrollToTop from './components/ScrollToTop'
 
 
 const reducer = (state, action) => {

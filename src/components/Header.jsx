@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 
 const Header = ({cartOpen, cart, cartItems}) => {
 
   const headerRef = useRef(undefined)
   const [active, setActive] = useState(false)
+  const {pathname} = useLocation()
+
 
   const isActive = () => {
     window.scrollY > 0 ? setActive(true) : setActive(false)
@@ -19,9 +21,17 @@ const Header = ({cartOpen, cart, cartItems}) => {
       }
   },[])
 
+  
+
+  useEffect(() => {
+    if(pathname){
+      window.scrollTo(0,0)
+    }
+  }, [pathname]);
+
 
   return (
-    <header className={active ? 'header view-nav' : 'header'}>
+    <header className={(active || pathname == '/about') ? 'header view-nav' : 'header'}>
       <h1 className='logo ff-secondary fw-regular text-light fs-xl'>Little Lemon</h1>
       <input type="checkbox" className='nav-toggle' name="nav-toggle" id="nav-toggle" />
       <nav className='nav ff-primary fs-s text-light' ref={headerRef}>

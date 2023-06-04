@@ -17,7 +17,7 @@ const Reservation = () => {
 
     const navigation = useNavigate()
 
-    const data = localStorage.getItem('booking')
+    const data = sessionStorage.getItem('booking')
     const bookingData = JSON.parse(data)
 
 
@@ -43,7 +43,7 @@ const Reservation = () => {
     }
 
     const handleNavigation = () => {
-        localStorage.setItem('booking',JSON.stringify(booking))
+        sessionStorage.setItem('booking',JSON.stringify(booking))
         navigation('/confirmation')
     }
 
