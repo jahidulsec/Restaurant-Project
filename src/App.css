@@ -217,10 +217,8 @@ select {
     color: var(--text-clr-dark);
 }
 
-.btn-yellow {
+button{
     border: none;
-    background-color: var(--clr-yellow);
-    color: var(--clr-black);
     padding: 5px 40px;
     border-radius: 5px;
     font-family: var(--ff-primary);
@@ -229,9 +227,15 @@ select {
     position: relative;
     overflow: hidden;
     isolation: isolate;
+    cursor: pointer;
 }
 
-.btn-yellow::before {
+.btn-yellow {
+    background-color: var(--clr-yellow);
+    color: var(--clr-black);
+}
+
+button::before {
     z-index: -1;
     content: '';
     display: block;
@@ -246,15 +250,14 @@ select {
     transition: transform 300ms ease-in-out;
 }
 
-.btn-yellow:hover{
-    cursor: pointer;
-}
 
-.btn-yellow:active::before{
+
+button:active::before{
     background-color: lightgray;
+    color: var(--clr-black);
 }
 
-.btn-yellow:hover::before{
+button:hover::before{
     transform: scale(1,1);
 }
 
@@ -262,6 +265,17 @@ select {
     cursor: not-allowed;
     opacity: 0.5;
 }
+
+
+.btn-dark{
+    background-color: var(--clr-black);
+    color: var(--clr-yellow);
+}
+
+.btn-dark::before{
+    background-color: #101010;
+}
+
 
 
 /* header section */
@@ -566,15 +580,17 @@ nav a{
     align-items: center;
     width: 17.875em;
     padding: 2em;
-    background-color: var(--clr-light);
-    transition: transform 500ms ease-in-out;
+    background-color: #f8f8f8;
+    transition: all 500ms ease-in-out;
     border-radius: 0 40px;
+    box-shadow: 0 1px 2px var(--clr-black);
 }
 .seller-card:hover{
     cursor: pointer;
     box-shadow: 0 3px 4px var(--clr-yellow);
     transform: translateY(-15px);
-    /* filter: drop-shadow(0.05em 0.05em 0.1rem var(--clr-yellow)); */
+    background-color: #101010;
+    color: var(--clr-light);
 }
 
 
@@ -584,7 +600,13 @@ nav a{
     object-fit: cover;
     border-radius: 50%;
     margin-bottom: 1em;
+    border: 5px solid var(--clr-black);
 }
+
+.seller-card:hover .seller-card-img{
+    border: 5px solid var(--clr-yellow);
+}
+
 
 
 
@@ -1558,3 +1580,56 @@ dialog::backdrop{
 .item-del:hover{
     color: var(--clr-red);
 }
+
+
+
+
+
+
+
+
+/* login section */
+.login-section {
+    padding: 8em 0;
+    background-image: url('Image/menu_shapes_2.svg');
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center;
+}
+
+
+
+.login-section form{
+    border-radius: 4.6875rem;
+    padding: 6em 4em;
+    inset: 0;
+    margin: auto;
+    background-color: var(--clr-yellow);
+    background-image: url('/Image/menu_shapes_black.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    box-shadow: 2px 2px 1px var(--clr-black);
+    background-color: var(--clr-yellow);
+    width: 600px;
+}
+
+.login-section h1{
+    margin-bottom: 1.5rem;
+}
+
+.login-section form input {
+    background-color: transparent;
+    border: 2px solid var(--clr-black);
+    width: 100%;
+}
+
+.login-section form label{
+    color: var(--clr-black);
+    width: 100%;
+}
+
+.login-section .btns{
+    margin-top: 1rem;
+}
+
