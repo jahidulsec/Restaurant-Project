@@ -3,6 +3,9 @@ import MenuCard from '../components/MenuCard'
 import { category, menuItems } from '../data'
 import {AiOutlineRight, AiOutlineLeft} from 'react-icons/ai'
 import { faL, fas } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
+import { useQuery } from '@tanstack/react-query'
+import newRequest from '../utilities/newRequest'
 
 const Menu = ({onAdd}) => {
 
@@ -14,12 +17,39 @@ const Menu = ({onAdd}) => {
   const [catSelected, setCatSelected] = useState('')
 
 
-  let menuItemData = menuItems.filter((item) => {
-    if(catSelected !== '') {
-      return item.category === catSelected
-    }
-    return item
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['Menu'],
+    queryFn: async() =>
+      axios.get('http://127.0.0.1:8000/api/menu-items/').then(
+        (res) => {return res.data.results}
+      ),
   })
+
+  console.log(data)
+
+  // const { isCatLoading, errorCat, dataCat } = useQuery({
+  //   queryKey: ['category'],
+  //   queryFn: () =>
+  //     fetch('http://127.0.0.1:8000/api/category/').then(
+  //       (res) => res.json(),
+  //     ).then(
+  //       (data) => {return data.results}
+  //     ),
+  // })
+
+  console.log(data)
+  
+  let menuItemData = []
+  if (isLoading) {
+    menuItemData = menuItems.filter((item) => {
+      if(catSelected !== '') {
+        return item.category === catSelected
+      }
+      return item
+    })
+  }
+
+
 
   const handlePageNumber = () => {
     let numberOfPage = menuItemData.length / limit
@@ -98,13 +128,14 @@ const Menu = ({onAdd}) => {
         </div>
         <div className="menu-cards">
           {
-            menuItemData.slice(firstIndex, lastIndex).map( item => (
+            isLoading ? 'loading' : error ? 'error' : 
+            data.slice(firstIndex, lastIndex).map( item => (
               <MenuCard 
                 key={item.id}
-                name={item.name}
+                name={item.title}
                 price={item.price}
                 desc={item.desc}
-                imgUrl={item.imgUrl}
+                imgUrl={item.img_url}
                 onAdd={onAdd}
               />
             ))

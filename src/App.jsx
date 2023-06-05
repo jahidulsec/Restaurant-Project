@@ -13,6 +13,7 @@ import { AlertProvider } from './context/alertContext'
 import Modal from './components/Modal'
 import About from './components/About'
 import Cart from './components/Cart'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 
 const reducer = (state, action) => {
@@ -48,6 +49,9 @@ const App = () => {
   const [cart, setCart] = useState(false)
   const [cartItems, dispatch] = useReducer(reducer, [])
 
+  const queryClient = new QueryClient()
+
+
   useEffect(()=>{
     console.log(cartItems)
   },[cartItems])
@@ -76,6 +80,8 @@ const App = () => {
 
   return (
     <div className='app'>
+      <QueryClientProvider client={queryClient}>
+
       <Header cartOpen={setCart} cart={cart} cartItems={cartItems} />
       <AlertProvider>
         <main>
@@ -99,6 +105,8 @@ const App = () => {
         </main>
       </AlertProvider>
       <Footer />
+      
+      </QueryClientProvider>
     </div>
   )
 }
