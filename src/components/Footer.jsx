@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {FaInstagram, FaFacebook, FaWhatsapp, FaTwitter} from 'react-icons/fa'
+import { NavLink, useLocation } from 'react-router-dom'
 
 const Footer = () => {
+
+  const {pathname} = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+  },[pathname])
+
   return (
     <footer className='footer-section bg-dark'>
       <div className="container">
@@ -10,8 +18,7 @@ const Footer = () => {
             Little Lemon
           </h3>
           <p className="footer-desc text-light ff-primary fs-s fw-regular">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist. 
           </p>
           <div className="social-icons">
             <span className="icon"><FaInstagram size={30}/></span>
@@ -26,10 +33,10 @@ const Footer = () => {
               Navigation
             </h3>
             <ul role='list'>
-              <li><a href="">Home</a></li>
-              <li><a href="">About</a></li>
-              <li><a href="">Menu</a></li>
-              <li><a href="">Order Online</a></li>
+              <li><NavLink to='/'>Home</NavLink></li>
+              <li><NavLink to="/about">About</NavLink></li>
+              <li><NavLink to="/online-menu">Menu</NavLink></li>
+              <li><NavLink to="/online-menu">Order Online</NavLink></li>
             </ul>
           </div>
           <div className="col2">
@@ -38,7 +45,7 @@ const Footer = () => {
             </h3>
             <ul role='list'>
               <li><a href="">Express Delivery</a></li>
-              <li><a href="">Reservations</a></li>
+              <li><NavLink to="/reservation">Reservations</NavLink></li>
               <li><a href="">Online Food</a></li>
             </ul>
           </div>

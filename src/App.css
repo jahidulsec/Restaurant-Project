@@ -943,10 +943,20 @@ nav a{
     color: var(--clr-light);
 }
 
+.social-icons .icon:hover{
+    cursor: pointer;
+    color: var(--clr-yellow);
+}
+
 .footer-section ul {
     color: var(--clr-light);
     font-family: var(--ff-primary);
     font-size: var(--fs-100);
+}
+
+.footer-section a:hover{
+    text-decoration: underline;
+    text-decoration-color: var(--clr-yellow);
 }
 
 
