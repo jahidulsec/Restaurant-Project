@@ -235,7 +235,7 @@ button{
     color: var(--clr-black);
 }
 
-button::before {
+.btn-yellow::before {
     z-index: -1;
     content: '';
     display: block;
@@ -252,12 +252,12 @@ button::before {
 
 
 
-button:active::before{
+.btn-yellow:active::before{
     background-color: lightgray;
     color: var(--clr-black);
 }
 
-button:hover::before{
+.btn-yellow:hover::before{
     transform: scale(1,1);
 }
 
@@ -272,8 +272,30 @@ button:hover::before{
     color: var(--clr-yellow);
 }
 
-.btn-dark::before{
+.btn-dark::before {
+    z-index: -1;
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
     background-color: #101010;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    transform: scale(0,1);
+    transform-origin: left;
+    transition: transform 300ms ease-in-out;
+}
+
+
+
+.btn-dark:active::before{
+    background-color: #404040;
+    color: var(--clr-black);
+}
+
+.btn-dark:hover::before{
+    transform: scale(1,1);
 }
 
 
@@ -1591,7 +1613,7 @@ dialog::backdrop{
 /* login section */
 .login-section {
     padding: 8em 0;
-    background-image: url('Image/menu_shapes_2.svg');
+    background-image: url('/Image/menu_shapes_2.svg');
     background-repeat: no-repeat;
     background-size: 80%;
     background-position: center;
@@ -1608,10 +1630,10 @@ dialog::backdrop{
     background-image: url('/Image/menu_shapes_black.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 100%;
+    background-size: 157%;
     box-shadow: 2px 2px 1px var(--clr-black);
     background-color: var(--clr-yellow);
-    width: 600px;
+    width: 500px;
 }
 
 .login-section h1{
@@ -1620,14 +1642,25 @@ dialog::backdrop{
 
 .login-section form input {
     background-color: transparent;
-    border: 2px solid var(--clr-black);
     width: 100%;
+    border: none;
+    border-bottom: 2px solid var(--clr-black);
+    border-radius: 0;
+    font-size: 14px;
+    margin-bottom: 1rem;
 }
 
-.login-section form label{
-    color: var(--clr-black);
-    width: 100%;
+.login-section form input::placeholder {
+    background-color: transparent;
 }
+
+
+.login-label{
+    display: block;
+    color: var(--clr-black);
+    font-family: var(--ff-primary);
+}
+
 
 .login-section .btns{
     margin-top: 1rem;
