@@ -391,6 +391,46 @@ nav a{
     transition: opacity 250ms ease-in-out 250ms;
 }
 
+.nav-user{
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.nav-user:hover{
+    color: var(--clr-yellow);
+}
+
+.nav-user-option{
+    position: absolute;
+    top: 3.25rem;
+    right: 1.5rem;
+    background-color: var(--clr-light);
+    padding: 1rem 0;
+    border-radius: 5px;
+    font-size: var(--fs-100);
+    text-align: left;
+    transform: scale(1,0);
+    transform-origin: top;
+    transition: transform 250ms;
+}
+
+.nav-user-active{
+    transform: scale(1,1);
+}
+
+.nav-user-option li{
+    cursor: pointer;
+    padding: 0.5rem 1.25rem; 
+}
+
+.nav-user-option li:hover{
+    background-color: var(--clr-yellow);
+}
+
 .cart-icon {
     color: var(--clr-yellow);
     position: absolute;
@@ -511,57 +551,33 @@ nav a{
 /* hero section */
 
 .hero-section{
-    position: relative
-}
-
-.hero-bg {
     position: relative;
-    z-index: -9;
+    background-image: url('/Image/about_1.jpg');
+    background-size: contain;
 }
-
-.bg-image img{
-    position: absolute;
-    max-height: var(--hero-bg-height);
-    min-width: 60%;
-    object-fit: cover;
-    top: 0;
-    left: 0;
-}
-
-.bg-frame svg{
-    /* max-height: 100vh; */
-    max-height: var(--hero-bg-height);
-    min-width: 50%;
-    object-fit: cover;
-    fill: var(--clr-black);
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-.bg-pattern svg {
-    max-width: var(--hero-bg-height);
-    object-fit: cover;
-    fill: var(--clr-yellow);
-    position: absolute;
-    top: 5em;
-    right: 5em;
-}
-
 
 .hero-section .container{
+    background-image: url('/Image/background/bg_hero.svg');
+    background-repeat: no-repeat;
+    background-position: right;
     display: grid;
     padding: 10% 10%;
     grid-template-columns: 1.1fr 1fr;
+    padding-bottom: 15rem;
 }
 
 .hero-title, .hero-para, .btns{
     grid-column: 2 / 3;
 }
 
+.hero-title {
+    margin-top: 3rem;
+}
+
 .hero-para{
     text-align: justify;
-    margin-bottom: 2rem;
+    max-width: 27rem;
+    margin-bottom: 1rem;
 }
 
 .btns{
@@ -575,11 +591,11 @@ nav a{
 
 /* best seller section */
 .best-seller-section .container{
-    margin-top: 6em;
+    margin-top: 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10em 5em 5em 5em;
+    padding: 5em;
     text-align: center;
 }
 
@@ -916,6 +932,11 @@ nav a{
 
 /* footer-section */
 
+.footer-section hr{
+    border: none;
+    border-top: 5px solid var(--clr-yellow);
+}
+
 .footer-section .container{
     padding: 5em;
     display: flex;
@@ -964,49 +985,27 @@ nav a{
 
 
 /* reservation-page */
-.reservation-section {
-    /* min-height: 100vh; */
-    /* overflow: hidden; */
-    position: relative;
-    /* margin-bottom: 2em; */
 
-}
-
-.reservation-bg-image > img,
-.reservation-bg-frame > svg{
-    position: absolute;
-    z-index: -1;
-    max-height: 50em;
-}
-
-.reservation-bg-frame > svg,
-.reservation-bg-pattern > svg{
-    top: 0;
-    right: 0;
-}
-
-.reservation-bg-frame > svg {
-    fill: var(--clr-black);
-}
-
-.reservation-bg-pattern > svg {
-    position: absolute;
-    z-index: -1;
-    top: 4em;
-    right: 6em;
-    fill: var(--clr-yellow);
-    max-height: 35em;
-    opacity: .25;
-}
 
 .reservation-section{
+    background-image: url('/Image/dinner-table.jpg');
+    background-repeat: no-repeat;
+    background-size: 50%;
     display: grid;
-    padding-right: 5em;
-    grid-template-columns: 0.8fr 1fr;
+    grid-template-columns: 0.5fr 1.5fr;
 }
 
 .reservation-section .container{
-    padding-top: 4em;
+    grid-column: 2/3;
+    background-image: url('/Image/background/bg_reservation.svg');
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: cover;
+    padding: 4em 4rem 10rem 2rem;
+}
+
+.reservation-section .container h1 {
+    margin-left: 15rem;
 }
 
 .reservation-section .container form{
@@ -1014,8 +1013,9 @@ nav a{
     flex-direction: column;
     align-items: start;
     flex-wrap: wrap;
-    padding: 2em 0 2em 1em;
-    gap: 2em;
+    /* padding: 2em 0 2em 1em; */
+    gap: 1em;
+    margin-left: 15rem;
 
 }
 
@@ -1027,12 +1027,6 @@ nav a{
     margin-bottom: 2em;
 }
 
-.reservation-section hr{
-    border: 2px solid var(--clr-yellow);
-    margin-top: 5em;
-    margin-right: -5em;
-    margin-left: -50em;
-}
 
 
 
@@ -1180,6 +1174,7 @@ input[type='date']{
 }
 
 .confirmation-section .container {
+    /* background-image: url('/Image/background/bg_reservation.svg'); */
     padding-top: 5em;
 }
 
@@ -1231,25 +1226,33 @@ input,
 textarea,
 input::placeholder,
 textarea::placeholder {
+    --outline-width: 2px;
     width: 19em;
     padding: 0.85em;
     background-color: var(--clr-light);
+    /* background-color: transparent; */
     border: none;
+    border-bottom: var(--outline-width) solid var(--clr-yellow);
     font-family: var(--ff-primary);
-    color: var(--clr-black);
+    color: var(--text-clr-dark);
     font-size: var(--fs-200);
     border-radius: 5px;
     font-size: var(--fs-100);
+    margin-bottom: 0.875rem;
 }
 
 input:focus, 
 textarea:focus{
-    outline: 2px solid var(--clr-yellow);
+    /* outline: 2px solid var(--clr-yellow); */
+    outline: transparent;
+    border-bottom: var(--outline-width) solid var(--clr-red);
 }
+
 
 input:focus-visible, 
 textarea:focus-visible{
-    outline: 2px solid var(--clr-yellow);
+    /* outline: 2px solid var(--clr-yellow); */
+    outline: transparent;
 }
 
 textarea{
@@ -1260,6 +1263,7 @@ textarea{
 input[type='checkbox']{
     width: 1em;
     height: 1em;
+    margin-bottom: 0;
 }
 
 
@@ -1276,8 +1280,12 @@ input[type='checkbox']{
 /* error message box */
 .error-msg{
     font-family: var(--ff-primary);
-    font-size: var(--fs-100);
+    font-size: 0.875rem;
+    font-weight: var(--fw-500);
     color: var(--clr-yellow);
+    margin-top: -0.5rem;
+    margin-bottom: 0.875rem;
+    font-style: italic;
 }
 
 .field-error-msg{
@@ -1309,12 +1317,12 @@ input[type='checkbox']{
     background-color: var(--clr-yellow);
     border: none;
     text-align: center;
-    box-shadow: 1px 1px 1px black;
+    box-shadow: 2px 2px 0px white;
 }
 
 dialog::backdrop{
     background-color: black;
-    opacity: 0.2;
+    opacity: 0.8;
 }
 
 
@@ -1683,4 +1691,48 @@ dialog::backdrop{
 .login-section .btns{
     margin-top: 1rem;
 }
+
+
+
+
+
+
+
+/* payment section */
+.payment-section{
+    background-image: url('/Image/arrangement.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+.payment-section .container{
+    background-image: url('/Image/background/bg_pay.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding: 8rem 0 0rem 7rem;
+}
+
+.payment-section form .personal-info,
+.payment-section form .card-info{
+    width: 40rem;
+    /* background-color: red; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    margin-bottom: 2rem;
+}
+
+.pay-total{
+    background-color: #303030af;
+    max-width: fit-content;
+    padding: 2rem;
+    border: 2px solid var(--clr-yellow);
+    border-radius: 0 1rem;
+    margin-bottom: 1rem;
+}
+
+.payment-section button{
+    margin-bottom: 5rem;
+}
+
 

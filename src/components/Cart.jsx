@@ -1,17 +1,12 @@
 import React from 'react'
 import {MdClose} from 'react-icons/md'
 import { menuItems } from '../data'
+import { Link, useNavigate } from 'react-router-dom'
 
-const Cart = ({cart, cartOpen, cartItems, onDelete, onReset}) => {
+const Cart = ({cart, cartOpen, cartItems, onDelete, onReset, cartPrices, cartTotal}) => {
 
-    const cartPrices = cartItems.map(item => {
-        return item.price
-    }) 
-
-    let cartTotal = cartPrices.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue
-      },0);
-
+    const navigate = useNavigate()
+    
     console.log(cartTotal, cartPrices)
     
   return (
@@ -50,11 +45,13 @@ const Cart = ({cart, cartOpen, cartItems, onDelete, onReset}) => {
                 </span>
             </div>
             <div className="cart-btns">
-                <button className='btn-yellow'>
-                    Pay your bill
-                </button>
                 <button 
                     className='btn-yellow'
+                    onClick={() => {navigate('/payment')}}
+                >
+                    Pay your bill
+                </button>
+                <button className='btn-yellow'
                     onClick={() => {onReset()}}
                 >
                     Reset

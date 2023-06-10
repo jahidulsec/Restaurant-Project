@@ -13,6 +13,7 @@ import { AlertProvider } from './context/alertContext'
 import Modal from './components/Modal'
 import About from './components/About'
 import Cart from './components/Cart'
+import Payment from './pages/Payment'
 
 
 const reducer = (state, action) => {
@@ -52,6 +53,14 @@ const App = () => {
     console.log(cartItems)
   },[cartItems])
 
+  const cartPrices = cartItems.map(item => {
+    return item.price
+}) 
+
+let cartTotal = cartPrices.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue
+  },0);
+
   const handleAddCart = (name, price) => {
     dispatch({
       type: 'added',
@@ -87,12 +96,15 @@ const App = () => {
             <Route path='/about' element={<About />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Registration />} />
+            <Route path='/payment' element={<Payment cartTotal={cartTotal} />} />
           </Routes>
           <Modal />
           <Cart 
             cart={cart} 
             cartOpen={setCart} 
             cartItems={cartItems} 
+            cartPrices={cartPrices}
+            cartTotal={cartTotal}
             onDelete={handleCartItemDelete}
             onReset={handleResetCart}
           />

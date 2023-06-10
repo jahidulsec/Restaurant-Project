@@ -12,6 +12,7 @@ const Footer = () => {
 
   return (
     <footer className='footer-section bg-dark'>
+      <hr />
       <div className="container">
         <div className="left">
           <h3 className='footer-nav-title ff-primary fs-l ff-bold text-light' >

@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
-import Button from '../components/Button'
-import Modal from '../components/Modal'
+import React, { useState, useEffect } from 'react'
+
 import * as Yup from 'yup'
-import { Formik, useFormik } from 'formik'
+import { useFormik } from 'formik'
 import { useAlertContext } from '../context/alertContext'
-import { useLocation, useNavigate } from 'react-router-dom'
+import {useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faChampagneGlasses, faClock, faTriangleExclamation, faUser } from '@fortawesome/free-solid-svg-icons'
 
@@ -135,7 +134,6 @@ const formik = useFormik({
                         {
                             !!formik.errors.firstName && formik.touched.firstName &&
                                 <span className="error-msg">{formik.errors.firstName}</span>
-
                         }
                     </div>
                     <div className="field">
@@ -177,7 +175,7 @@ const formik = useFormik({
                     <div className="field">
                         <label htmlFor="phone">Phone Number<sup>✻</sup></label>
                         <input 
-                            type='phone'
+                            type='tel'
                             name="phone" 
                             id="phone" 
                             placeholder='+880 1234 123 123'
@@ -337,7 +335,6 @@ const formik = useFormik({
                     Confirm Booking
                 </button>
             </form>
-            <hr />
         </div>
     </section>
   )
