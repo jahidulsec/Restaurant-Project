@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 const Login = () => {
 
@@ -41,7 +41,9 @@ const Login = () => {
             >
               Login
             </button>
-            <button className='btn-dark'>Register!</button>
+            <Link to={`/register`}>
+              <button className='btn-dark'>Register!</button>
+            </Link>
           </div>
         </form>
       </div>

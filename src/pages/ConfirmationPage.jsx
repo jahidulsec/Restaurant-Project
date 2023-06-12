@@ -6,11 +6,17 @@ import { useAlertContext } from '../context/alertContext'
 import {useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faChampagneGlasses, faClock, faTriangleExclamation, faUser } from '@fortawesome/free-solid-svg-icons'
+import Button from '../components/Button'
+import useSubmit from '../hooks/useSubmit'
+
+
 
 const ConfirmationPage = () => {
 
     const [success,setSuccess] = useState(false)
-    const{onOpen, onClose} = useAlertContext()
+    const{onOpen} = useAlertContext()
+
+    const { isLoading, response, submit } = useSubmit()
 
     const navigator = useNavigate()
 
@@ -41,6 +47,7 @@ const formik = useFormik({
     },
     onSubmit: (values) => {
         console.log(values)
+        submit('', values)
         setSuccess(true)
     },
     validationSchema: Yup.object({
@@ -65,19 +72,21 @@ const formik = useFormik({
     })
 
 
-    useEffect(() => {
-        if(success){
-            onOpen('Success!', 'Thanks for your patient!')
-            formik.resetForm()
+    useEffect(() => { 
+        if (response) { 
+          onOpen(response.type, response.message); 
+          if (response.type === 'success') { 
+            formik.resetForm(); 
             setTimeout(()=>{
                 navigator('/')
             },[4000])
             setTimeout(() => {
-                // onClose()
                 sessionStorage.removeItem("booking")
             }, [5000])
-        }
-    },[success])
+          } 
+        } 
+      }, [response]); 
+
 
 
 
@@ -326,14 +335,12 @@ const formik = useFormik({
                         }
                     </div>
                 </div>
-                <button 
-                    className='btn-yellow'
-                    type={`submit`}
-                    id='btn-modal'
+                <Button
                     disabled={handleSubmit()}
+                    loading={isLoading}
                 >
-                    Confirm Booking
-                </button>
+                    Confirm booking
+                </Button>
             </form>
         </div>
     </section>

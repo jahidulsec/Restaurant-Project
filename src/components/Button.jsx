@@ -1,6 +1,8 @@
 import React from 'react'
 
-const Button = ({children, onClick, id, type, onDisable}) => {
+const Button = ({children, onClick, id, type, disabled, loading}) => {
+
+  // const [loading, setLoading] = React.useState(false)
 
   return (
     <button 
@@ -8,8 +10,15 @@ const Button = ({children, onClick, id, type, onDisable}) => {
       className='btn-yellow'
       onClick={onClick}
       id={id}
+      // onClick={()=> {setLoading(!loading)}}
+      disabled={disabled}
     >
-        {children}
+      {
+        loading ? 
+        <span className="loading"></span>
+        :
+        children
+      }
     </button>
   )
 }

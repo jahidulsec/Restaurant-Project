@@ -5,7 +5,7 @@ const MenuCard = ({ name, desc, imgUrl, price, onAdd}) => {
 
   return (
     <div className='menu-card'>
-        <img className='menu-img' src={imgUrl} alt={name} />
+        <img className='menu-img' src={imgUrl} alt={name} loading='lazy' />
         <div className="card-header">
             <h4 className='ff-secondary fs-xl fw-regular'>
                 {name}

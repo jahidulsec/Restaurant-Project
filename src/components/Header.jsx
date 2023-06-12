@@ -60,7 +60,7 @@ const Header = ({cartOpen, cart, cartItems}) => {
 
 
   return (
-    <header className={(active || pathname === '/about' || pathname === '/login') ? 'header view-nav' : 'header'}>
+    <header className={(active || pathname === '/about' || pathname === '/login' || pathname === '/register') ? 'header view-nav' : 'header'}>
       <h1 className='logo ff-secondary fw-regular text-light fs-xl'>Little Lemon</h1>
       <input type="checkbox" className='nav-toggle' name="nav-toggle" id="nav-toggle" />
       <nav className='nav ff-primary fs-s text-light' ref={headerRef}>

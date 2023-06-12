@@ -8,7 +8,7 @@ const BestSellerCard = ({name, desc, imgUrl}) => {
 
   return (
     <div className="seller-card" onClick={() => {navigate('/online-menu')}}>
-        <img className='seller-card-img' src={`Image/${imgUrl}.jpg`} alt="item-img" />
+        <img className='seller-card-img' src={`Image/${imgUrl}.jpg`} alt="item-img" loading='lazy' />
         <h2 className="seller-card-title fw-regular ff-secondary fs-xl">
             {name}
         </h2>

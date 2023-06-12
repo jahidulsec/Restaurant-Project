@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { useAlertContext } from '../context/alertContext'
-import { useNavigate } from 'react-router-dom'
 
 const Modal = () => {
 
