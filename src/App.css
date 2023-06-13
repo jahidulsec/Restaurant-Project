@@ -299,6 +299,14 @@ button{
 }
 
 /*  Button loading */
+
+.loading-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+}
+
 .loading::after {
     display: block;
     content: '';

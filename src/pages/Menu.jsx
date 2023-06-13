@@ -3,6 +3,7 @@ import MenuCard from '../components/MenuCard'
 import { category, menuItems } from '../data'
 import {AiOutlineRight, AiOutlineLeft} from 'react-icons/ai'
 import { faL, fas } from '@fortawesome/free-solid-svg-icons'
+import Loading from '../components/Loading'
 
 const Menu = ({onAdd}) => {
 
@@ -12,7 +13,7 @@ const Menu = ({onAdd}) => {
   const [firstIndex, setFirstIndex] = useState()
   const [lastIndex, setLastIndex] = useState()
   const [catSelected, setCatSelected] = useState('')
-
+  const [isLoading, setIsLoading] = useState(false)
 
   let menuItemData = menuItems.filter((item) => {
     if(catSelected !== '') {
@@ -96,6 +97,8 @@ const Menu = ({onAdd}) => {
             }
           </div>
         </div>
+        {
+          isLoading ? <Loading /> :
         <div className="menu-cards">
           {
             menuItemData.slice(firstIndex, lastIndex).map( item => (
@@ -109,7 +112,7 @@ const Menu = ({onAdd}) => {
               />
             ))
           }
-        </div>
+        </div>}
         <div 
           className={`pagination ${pageNumber.length < 2 ? 'pagination-hidden' : '' }`}
         >
